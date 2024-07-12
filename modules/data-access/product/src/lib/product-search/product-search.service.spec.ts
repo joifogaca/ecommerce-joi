@@ -1,12 +1,12 @@
-import { mockProducts } from './../../mocks/product.mock';
-import { Product } from './../product.model';
 import { TestBed } from '@angular/core/testing';
+import { mockProducts } from '../mocks/product.mock';
+import { Product } from '../model/product.model';
 
-import { ProductSearchService } from './product-search.service';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { ProductSearchService } from './product-search.service';
 
 describe('ProductSearchService', () => {
   let service: ProductSearchService;
