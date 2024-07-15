@@ -20,7 +20,16 @@ Run `npx nx build ecommerce-joi` to build the application. The build artifacts a
 
 ## Running tasks
 
+Rodando apenas os testes afetados:
+
+```
+npx nx affected:test
+```
+
 To execute tasks with Nx use the following syntax:
+
+
+
 
 ```
 npx nx <target> <project> <...options>
