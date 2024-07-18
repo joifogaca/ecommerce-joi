@@ -17,6 +17,7 @@ describe('ProductSearchComponent', () => {
   let component: ProductSearchComponent;
   let fixture: ComponentFixture<ProductSearchComponent>;
   let productSearchService: ProductSearchService;
+  let input: HTMLInputElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,16 +32,15 @@ describe('ProductSearchComponent', () => {
     productSearchService = TestBed.inject(ProductSearchService);
     fixture = TestBed.createComponent(ProductSearchComponent);
     component = fixture.componentInstance;
+    jest.spyOn(productSearchService, 'searchByName');
     fixture.detectChanges();
+    input = fixture.nativeElement.querySelector('input');
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
   it('should debounce when input field is changed', fakeAsync(() => {
-    jest.spyOn(productSearchService, 'searchByName');
-    const input: HTMLInputElement =
-      fixture.nativeElement.querySelector('input');
     input.value = 'notebook';
     input.dispatchEvent(new Event('input'));
 
@@ -50,9 +50,6 @@ describe('ProductSearchComponent', () => {
     expect(productSearchService.searchByName).toHaveBeenCalledWith(input.value);
   }));
   it('should search multiple times', fakeAsync(() => {
-    jest.spyOn(productSearchService, 'searchByName');
-    const input: HTMLInputElement =
-      fixture.nativeElement.querySelector('input');
     input.value = 'note';
     input.dispatchEvent(new Event('input'));
 
@@ -66,9 +63,6 @@ describe('ProductSearchComponent', () => {
     expect(productSearchService.searchByName).toHaveBeenCalledTimes(2);
   }));
   it('should prevent identical submissions', fakeAsync(() => {
-    jest.spyOn(productSearchService, 'searchByName');
-    const input: HTMLInputElement =
-      fixture.nativeElement.querySelector('input');
     input.value = 'note';
     input.dispatchEvent(new Event('input'));
 
@@ -82,9 +76,6 @@ describe('ProductSearchComponent', () => {
     expect(productSearchService.searchByName).toHaveBeenCalledTimes(1);
   }));
   it('should prevent empty submissions', fakeAsync(() => {
-    jest.spyOn(productSearchService, 'searchByName');
-    const input: HTMLInputElement =
-      fixture.nativeElement.querySelector('input');
     input.value = '';
     input.dispatchEvent(new Event('input'));
 
